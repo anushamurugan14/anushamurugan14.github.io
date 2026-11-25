@@ -443,7 +443,7 @@ const PLATS=[['Amazon','Marketplace','Seller and Vendor Central, Sponsored Produ
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ph=s=>esc(s).replace(/\[([^\]]+)\]/g,'<span class="ph">[$1]</span>');
 const isPh=s=>/^\[[^\]]+\]$/.test(s.trim());
-document.getElementById('platGrid').innerHTML=PLATS.map(([n,c,d,l])=>`<div class="plat glass rv"><div class="slab${l?' logo':''}">${l?`<img src="logos/${l}.png" alt="${n}" loading="lazy">`:`<span>${n}</span>`}</div><b class="pn">${n}</b><span class="cat">${c}</span><p>${ph(d)}</p></div>`).join('');
+document.getElementById('platGrid').innerHTML=PLATS.map(([n,c,d,l])=>`<div class="plat glass rv"><div class="slab${l?' logo':''}">${l?`<img src="${l}.png" alt="${n}" loading="lazy">`:`<span>${n}</span>`}</div><b class="pn">${n}</b><span class="cat">${c}</span><p>${ph(d)}</p></div>`).join('');
 const grid=document.getElementById('caseGrid');
 grid.innerHTML=CASES.map((c,i)=>`<article class="case glass rv" tabindex="0" role="button" data-i="${i}" aria-label="Open case study: ${esc(c.title)}"><div class="tag">${esc(c.tag)}</div><div class="big">${esc(c.big)}</div><div class="ml">${esc(c.ml)}</div><span class="who">${esc(c.who)}</span><h3>${esc(c.title)}</h3><div class="go">Read case study<i>→</i></div></article>`).join('');
 const dlg=document.getElementById('dlg');
