@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anusha Murugan · E-commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* VOICE: confident, cinematic, numbers first — a growth operator's launch reel.
+   IDEA: a premium studio object — one glossy liquid-purple form that breathes behind the portrait, over a perspective grid.
+   PICTURE: fixed three.js scene (physical glossy blob, studio reflections, halo, moving grid floor) behind glass sections.
+   COLOUR and TYPE: black #07060b, purple #8b5cf6, violet #a855f7, lilac #c4b5fd, white ink. Plus Jakarta Sans 700, Instrument Serif italic accents.
+   LAYOUT: full-height hero over the 3D core, platform marquee, bento about, tilt-and-glare case cards, glowing timeline, big CTA. */
+:root{color-scheme:dark;--bg:#07060b;--ink:#f4f1ff;--mute:#a49cc0;--p:#8b5cf6;--v:#a855f7;--l:#c4b5fd;--glass:rgba(20,15,34,.58);--line:rgba(196,181,253,.14);--pink:#f0abfc}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Plus Jakarta Sans",system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+::selection{background:var(--p);color:#fff}
+h1,h2,h3{font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-weight:700;line-height:1.04;letter-spacing:-.035em;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,5.4vw,72px)}h2{font-size:clamp(32px,4.2vw,54px)}h3{font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+em.s{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em;padding-right:.06em}
+p{margin:0 0 14px;max-width:66ch}
+.grad{background:linear-gradient(100deg,#fff 10%,var(--l) 45%,var(--v) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#gl{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+#shade{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 80% at 50% 120%,rgba(139,92,246,.18),transparent 60%),linear-gradient(180deg,transparent 60%,rgba(7,6,11,.5));}
+#cur{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(closest-side,rgba(168,85,247,.16),transparent);pointer-events:none;z-index:2;transition:opacity .3s;opacity:0}
+main,nav,footer{position:relative;z-index:3}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(5vw,18px)}
+section{padding:clamp(70px,10vw,140px) 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--l);padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:rgba(139,92,246,.1);margin-bottom:22px}
+.dot{width:8px;height:8px;border-radius:50%;background:#a3e635;box-shadow:0 0 12px #a3e635;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.sec-h{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px 60px;align-items:end;margin-bottom:48px}
+.sec-h p{color:var(--mute);margin:0;font-size:17px}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+/* nav */
+nav{position:fixed;top:14px;left:0;right:0;display:flex;justify-content:center;padding:0 12px;z-index:50;pointer-events:none}nav .pill{pointer-events:auto}
+.pill{display:flex;align-items:center;gap:6px;padding:6px;border-radius:99px;max-width:100%}
+.brand{font:700 15px "Plus Jakarta Sans",sans-serif;padding:10px 16px;border-radius:99px;background:linear-gradient(135deg,var(--p),var(--v));color:#fff;text-decoration:none;white-space:nowrap}
+.links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}.links::-webkit-scrollbar{display:none}
+.links a{flex:none;color:var(--mute);text-decoration:none;font-size:14px;padding:11px 14px;border-radius:99px;transition:.2s}
+.links a:hover,.links a.on{color:#fff;background:rgba(196,181,253,.1)}
+.li{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:700 15px "Plus Jakarta Sans";color:#fff;text-decoration:none;background:rgba(139,92,246,.25);border:1px solid var(--line)}.li:hover{background:var(--v)}
+#notesBtn{flex:none;font:500 12px "Plus Jakarta Sans";color:var(--mute);background:transparent;border:1px dashed var(--line);border-radius:99px;padding:10px 12px;min-height:40px;cursor:pointer}
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:14px 26px;border-radius:99px;font:600 15px "Plus Jakarta Sans";text-decoration:none;color:#fff;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .3s;background:linear-gradient(135deg,var(--p),var(--v));box-shadow:0 10px 40px -10px rgba(168,85,247,.8)}
+.btn:hover{box-shadow:0 16px 60px -10px rgba(168,85,247,1)}
+.btn.ghost{background:rgba(255,255,255,.04);border-color:var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--l)}
+.btn svg{width:18px;height:18px}
+button:focus-visible,a:focus-visible{outline:2px solid var(--l);outline-offset:3px}
+/* hero */
+.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0 60px}
+.hero .wrap{width:100%}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:40px;align-items:center}
+.pwrap{position:relative;justify-self:center;width:min(100%,380px);aspect-ratio:4/5;perspective:1000px}
+.portrait{position:absolute;inset:0;border-radius:34px;overflow:hidden;border:1px solid rgba(196,181,253,.35);background:linear-gradient(160deg,rgba(139,92,246,.45),rgba(20,15,34,.85) 60%);box-shadow:0 40px 100px -30px rgba(168,85,247,.7),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}.pshade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(26,10,52,.92));pointer-events:none}.pname{position:absolute;left:22px;bottom:18px;right:22px}.pname b{display:block;font-size:20px;letter-spacing:-.02em}.pname span{font-size:13px;color:var(--l)}
+.pfill{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:10px}
+.pfill span{font:italic 400 120px/1 "Instrument Serif",serif;color:rgba(244,241,255,.9)}
+.pfill small{font-size:13px;color:var(--pink)}
+body.clean .note-txt{display:none}
+.float{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;font-size:14px;white-space:nowrap;animation:bob 6s ease-in-out infinite;box-shadow:0 20px 40px -20px rgba(0,0,0,.8)}
+.float b{font-size:20px;letter-spacing:-.02em}.float span{color:var(--mute)}.float a{color:var(--l)}
+.f1{left:-16%;top:12%}.f2{right:-14%;top:40%;animation-delay:-2s}.f3{right:-10%;bottom:-5%;animation-delay:-4s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.lede{font-size:clamp(17px,1.5vw,19px);color:var(--mute);margin-top:26px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.open{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:26px;font-size:13.5px}
+.open span{color:var(--mute);margin-right:4px}.open b{font-weight:600;padding:6px 12px;border-radius:99px;border:1px solid rgba(196,181,253,.3);background:rgba(139,92,246,.14);color:#ece6ff}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:64px}
+.metric{padding:20px 22px;border-radius:18px}
+.metric b{display:block;font:700 clamp(28px,3.2vw,40px)/1 "Plus Jakarta Sans",sans-serif;white-space:nowrap;background:linear-gradient(120deg,#fff,var(--l));-webkit-background-clip:text;background-clip:text;color:transparent}
+.metric span{display:block;font-size:13.5px;color:var(--mute);margin-top:8px;line-height:1.45}
+.labels{position:fixed;inset:0;z-index:2;pointer-events:none;transition:opacity .3s}
+.lbl{position:absolute;left:0;top:0;font:600 13px "Plus Jakarta Sans";padding:5px 11px;border-radius:99px;background:rgba(20,15,34,.7);border:1px solid rgba(196,181,253,.3);color:var(--l);white-space:nowrap;backdrop-filter:blur(6px)}
+.lbl.hub{background:linear-gradient(135deg,var(--p),var(--v));color:#fff;border-color:transparent}
+.scrollhint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:8px}
+.scrollhint i{width:1px;height:40px;background:linear-gradient(var(--l),transparent);animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* marquee */
+.marquee{position:relative;z-index:3;border-block:1px solid var(--line);background:rgba(10,8,18,.7);backdrop-filter:blur(10px);overflow:hidden;padding:22px 0}
+.track{display:flex;gap:56px;width:max-content;animation:mq 38s linear infinite}
+.track span{font:600 clamp(20px,2.2vw,28px) "Plus Jakarta Sans",sans-serif;color:rgba(244,241,255,.55);white-space:nowrap;display:flex;align-items:center;gap:56px}
+.track span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--v);box-shadow:0 0 14px var(--v)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.b{padding:28px}.b1{grid-column:span 4;grid-row:span 2}.b2,.b3,.b4,.b5{grid-column:span 2}
+.b h3{margin-bottom:8px}.b p{color:var(--mute);font-size:15px;margin:0}
+.b1 p{font-size:17px;color:#d8d2ee;margin-bottom:16px}
+.ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(139,92,246,.18);border:1px solid rgba(196,181,253,.25);margin-bottom:18px;color:var(--l)}
+.ico svg{width:22px;height:22px}
+.langs{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+/* competencies */
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative;perspective:1200px}
+.flow::before{content:"";position:absolute;left:6%;right:6%;top:50%;height:2px;background:linear-gradient(90deg,transparent,var(--v),var(--pink),var(--v),transparent);box-shadow:0 0 18px var(--v);z-index:-1}
+.step{background:rgba(16,12,28,.94);padding:22px;display:flex;flex-direction:column;gap:4px;transform:rotateX(10deg);transition:transform .35s}
+.step:hover{transform:rotateX(0) translateY(-6px)}
+.step b{font-size:17px;letter-spacing:-.02em}.step span{font-size:14px;color:var(--mute)}
+.step.hot{background:linear-gradient(160deg,rgba(168,85,247,.45),rgba(20,15,34,.7));border-color:rgba(240,171,252,.5);box-shadow:0 20px 60px -20px var(--v)}
+@media(max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow::before{display:none}}
+@media(max-width:640px){.flow{grid-template-columns:minmax(0,1fr)}.plat{padding:16px}.slab{height:76px}.plat p{font-size:13.5px}}
+.comps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.comp.perf{grid-row:span 2;background:linear-gradient(160deg,rgba(139,92,246,.28),var(--glass) 55%)}
+.comp.wide{grid-column:span 2}.comp.wide ul{columns:2;column-gap:30px}
+.comp.perf li,.comp.ai li{padding:9px 0}
+@media(max-width:1000px){.comps{grid-template-columns:repeat(2,minmax(0,1fr))}.comp.perf{grid-row:auto}.comp.wide{grid-column:span 2}}
+@media(max-width:640px){.comps{grid-template-columns:minmax(0,1fr)}.comp.wide{grid-column:auto}.comp.wide ul{columns:1}}
+.comp{padding:26px;transition:transform .3s,border-color .3s}
+.comp:hover{transform:translateY(-6px);border-color:rgba(196,181,253,.45)}
+.comp ul{list-style:none;margin:14px 0 0;padding:0;font-size:15px;color:#d8d2ee}
+.comp li{padding:7px 0;border-top:1px solid var(--line)}
+/* cases */
+.cases{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;perspective:1400px}
+.case{grid-column:span 2;position:relative;padding:30px;display:flex;flex-direction:column;gap:12px;min-height:400px;overflow:hidden;transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s;cursor:pointer}
+.case:nth-child(1),.case:nth-child(2){grid-column:span 3}.case:nth-child(6){grid-column:span 6;min-height:280px}
+.case::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(168,85,247,.28),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.case:hover{border-color:rgba(196,181,253,.5)}.case:hover::before{opacity:1}
+.case .tag{font-size:13px;color:var(--l);font-weight:600}
+.case .big{font:700 clamp(42px,4.4vw,62px)/.95 "Plus Jakarta Sans",sans-serif;white-space:nowrap;transform:translateZ(50px);background:linear-gradient(120deg,#fff 20%,var(--v));-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:10px}
+.case .ml{color:var(--mute);font-size:14.5px;transform:translateZ(30px)}
+.case h3{transform:translateZ(24px);margin-top:auto}
+.case .who{display:inline-flex;align-self:flex-start;font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mute)}
+.case .go{display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:15px;color:#fff;padding-top:16px;border-top:1px solid var(--line);transform:translateZ(20px)}
+.case .go i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(139,92,246,.25);transition:.3s;font-style:normal}
+.case:hover .go i{background:var(--v);transform:rotate(-45deg)}
+dialog{max-width:900px;width:calc(100% - 24px);max-height:90vh;border:1px solid var(--line);border-radius:26px;padding:0;background:#0d0a16;color:var(--ink);box-shadow:0 40px 120px rgba(139,92,246,.35)}
+dialog[open]{animation:up .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{opacity:0;transform:translateY(40px) scale(.97)}}
+dialog::backdrop{background:rgba(4,3,8,.75);backdrop-filter:blur(8px)}
+.dlg-h{position:sticky;top:0;z-index:1;padding:30px 32px 24px;background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(13,10,22,.96) 70%);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;gap:16px;justify-content:space-between;align-items:start}
+.dlg-h .tag{font-size:13px;color:var(--l)}
+#dlgClose{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:20px;cursor:pointer}
+.dlg-b{padding:10px 32px 32px}
+.kpis{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 6px}
+.kpis span{padding:10px 14px;border-radius:12px;background:rgba(139,92,246,.16);border:1px solid rgba(196,181,253,.25);font-weight:600;font-size:14.5px}
+.row{display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.row>b{font-size:13px;color:var(--l);font-weight:600;padding-top:2px}
+.row ul{margin:0;padding-left:18px}.row li{margin:3px 0}.row p{margin:0;color:#ddd7f0}
+/* timeline */
+.tl{position:relative;padding-left:44px}
+.tl::before,.tl .fill{content:"";position:absolute;left:11px;top:6px;bottom:0;width:2px;background:var(--line);border-radius:2px}
+.tl .fill{background:linear-gradient(var(--l),var(--v));box-shadow:0 0 16px var(--v);height:0;bottom:auto}
+.job{position:relative;padding:30px;margin-bottom:20px}
+.job::before{content:"";position:absolute;left:-41px;top:36px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--v);box-shadow:0 0 16px var(--v)}
+.job .meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--l);font-size:14px;margin:8px 0 14px}
+.job ul{margin:0;padding-left:18px;color:#ddd7f0;max-width:84ch}.job li{margin:6px 0}
+.job .co{color:var(--mute);font-size:15px}
+/* tools */
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tool{padding:24px}.tool b{display:block;font:700 17px "Plus Jakarta Sans",sans-serif;margin-bottom:14px}
+.plats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;perspective:1200px}
+.plat{padding:24px;display:flex;flex-direction:column;gap:6px;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,opacity .9s;transform-style:preserve-3d}
+.plat:hover{border-color:rgba(196,181,253,.5)}
+.slab{height:96px;border-radius:16px;display:grid;place-items:center;margin-bottom:16px;background:linear-gradient(150deg,#2a1452,#140b26 70%);border:1px solid rgba(196,181,253,.28);transform:translateZ(36px) rotateX(14deg);transform-origin:bottom;transition:transform .4s cubic-bezier(.2,.8,.2,1);box-shadow:0 1px 0 #4c2a8a,0 2px 0 #43247a,0 3px 0 #3a1f6b,0 4px 0 #321a5c,0 5px 0 #2a164e,0 6px 0 #231240,0 22px 30px -12px rgba(168,85,247,.55),inset 0 1px 0 rgba(255,255,255,.18)}
+.slab span{font-weight:800;font-size:26px;letter-spacing:-.04em;background:linear-gradient(180deg,#fff 30%,var(--l));-webkit-background-clip:text;background-clip:text;color:transparent}
+.slab.logo{background:linear-gradient(180deg,#fff,#efe9fb);box-shadow:0 1px 0 #d9ccf5,0 2px 0 #c4b0ee,0 3px 0 #a98be3,0 4px 0 #8f69d6,0 5px 0 #7a4fca,0 6px 0 #6239b0,0 22px 30px -12px rgba(168,85,247,.6),inset 0 1px 0 #fff}
+.slab img{max-width:72%;max-height:58px;object-fit:contain;display:block}
+.pn{font-size:17px;letter-spacing:-.02em}
+.plat:hover .slab{transform:translateZ(50px) rotateX(0)}
+.plat b{font-size:19px;letter-spacing:-.02em}.plat .cat{font-size:12.5px;color:var(--l)}.plat p{font-size:14.5px;color:var(--mute);margin:6px 0 0}
+@media(max-width:1000px){.plats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13.5px;padding:6px 13px;border-radius:99px;background:rgba(139,92,246,.12);border:1px solid var(--line);transition:.2s}
+.chip:hover{border-color:var(--l);box-shadow:0 0 18px rgba(168,85,247,.45);color:#fff}
+/* creds */
+.creds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cred{padding:28px}.cred .k{font-size:13px;color:var(--l);font-weight:600}
+.cred h3{margin:10px 0 10px}.cred p{color:var(--mute);font-size:15px;margin:0}
+.seal{float:right;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font:800 12px "Plus Jakarta Sans";color:#fff;background:conic-gradient(from 0deg,var(--p),var(--pink),var(--v),var(--p));box-shadow:0 0 24px rgba(168,85,247,.6)}
+/* contact */
+.contact{text-align:center;padding:clamp(48px,7vw,96px) clamp(20px,5vw,80px);position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;width:700px;height:700px;left:50%;top:-60%;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(168,85,247,.45),transparent);pointer-events:none}
+.contact h2{font-size:clamp(36px,6vw,78px);position:relative}
+.contact p{margin:20px auto 0;color:#d8d2ee;font-size:18px;position:relative}
+.contact .cta{justify-content:center;position:relative}
+.cline{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:30px;color:var(--mute);font-size:15px;position:relative}
+footer{padding:30px 0 40px;color:var(--mute);font-size:13px}
+/* notes */
+.note{border:1.5px dashed var(--pink);border-radius:14px;padding:12px 16px;font-size:14px;background:rgba(240,171,252,.07);margin-top:16px;color:#f5e8ff}
+.note b{color:var(--pink)}
+.ph{color:var(--pink);border-bottom:1.5px dashed var(--pink);font-size:.93em}
+body.clean .note,body.clean .ph,body.clean .draft,body.clean .ph-li{display:none!important}
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.case.rv.in{transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,opacity .9s}
+.comp.rv.in:hover{transform:translateY(-6px)}.comp.rv.in{transition:transform .3s,border-color .3s,opacity .9s}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:10;background:var(--v);color:#fff;padding:12px 18px;border-radius:99px;font-size:14px;opacity:0;transition:.3s;pointer-events:none}
+.toast.on{opacity:1}
+@media(max-width:1000px){.hero-grid,.sec-h{grid-template-columns:minmax(0,1fr)}.grid4,.tools{grid-template-columns:repeat(2,minmax(0,1fr))}.creds{grid-template-columns:minmax(0,1fr)}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.case,.case:nth-child(1),.case:nth-child(2){grid-column:span 3}.case:nth-child(6){grid-column:span 6}.b1{grid-column:span 6;grid-row:auto}.b2,.b3,.b4,.b5{grid-column:span 3}}
+@media(max-width:1000px){.pwrap{width:min(78%,320px);margin-top:20px}.f1{left:-10%}.f2{right:-10%}}
+@media(max-width:640px){.float{font-size:12px;padding:9px 12px}.float b{font-size:16px}.f3{right:-4%}.grid4,.tools{grid-template-columns:minmax(0,1fr)}.case,.case:nth-child(1),.case:nth-child(2),.b2,.b3,.b4,.b5{grid-column:span 6}.case{min-height:320px}.row{grid-template-columns:minmax(0,1fr);gap:4px}.dlg-h,.dlg-b{padding-inline:20px}.brand{padding:10px 12px}.links a{padding:11px 10px}.job{padding:22px}.tl{padding-left:32px}.job::before{left:-29px}.lbl{font-size:11px;padding:4px 8px}.metric{padding:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas><div id="shade"></div><div id="cur"></div>
+
+<nav><div class="pill glass">
+  <a class="brand" href="#top">AM</a>
+  <div class="links" id="links"><a href="#about">About</a><a href="#platforms">Platforms</a><a href="#cases">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#ai">AI</a><a href="#credentials">Credentials</a><a href="#contact">Contact</a></div>
+  <a class="li" href="https://www.linkedin.com/in/anusha-murugan/" target="_blank" rel="noopener" aria-label="LinkedIn profile">in</a><button id="notesBtn" aria-pressed="true">Notes on</button>
+</div></nav>
+
+<main>
+<header class="hero" id="top"><div class="wrap">
+  <div class="hero-grid"><div>
+    <div class="eyebrow"><span class="dot"></span>E-commerce &amp; Growth Manager · Dubai, UAE</div>
+    <h1>Hi, I’m Anusha. I grow e-commerce revenue <em class="s grad">that stays profitable.</em></h1>
+    <p class="lede">Seven years scaling D2C stores on Shopify and Magento, marketplace accounts on Amazon, Noon, Trendyol and Jumia, and delivery channels like Deliveroo and Careem, across MENA, the US and the EU. I run the full funnel, from paid acquisition to conversion, retention and measurement, and judge every channel by ROAS, nCAC and AOV.</p>
+    <div class="cta"><a class="btn" href="#cases">See the results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="#contact">Get in touch</a></div>
+    <div class="open"><span>Open to</span><b>E-commerce Manager</b><b>E-commerce Account Manager</b><b>Performance Marketer</b></div>
+  </div><div class="pwrap">
+    <div class="portrait" id="portrait"><img id="photo" src="photo.jpg" alt="Anusha Murugan, E-commerce and Growth Manager"><div class="pshade"></div><div class="pname"><b>Anusha Murugan</b><span>E-commerce &amp; Growth Manager</span></div></div>
+    <div class="float f1 glass"><b>+64%</b><span>Amazon sales</span></div>
+    <div class="float f2 glass"><b>25</b><span>client stores · EU &amp; US</span></div>
+    <div class="float f3 glass"><span class="dot"></span><span>Currently growing <a href="https://hezire.com/" target="_blank" rel="noopener">hezire.com</a></span></div>
+  </div></div>
+  <div class="metrics">
+    <div class="metric glass"><b data-n="64" data-pre="+" data-suf="%">+64%</b><span>Amazon sales over three years, 150-SKU client account</span></div>
+    <div class="metric glass"><b data-n="19" data-from="34" data-pre="34→" data-suf="%">34→19%</b><span>Amazon ACoS, a 44% relative reduction</span></div>
+    <div class="metric glass"><b data-n="52" data-pre="+" data-suf="%">+52%</b><span>Website traffic, year over year</span></div>
+    <div class="metric glass"><b data-n="26" data-pre="−" data-suf="%">−26%</b><span>Cost per lead, with qualified pipeline up 22%</span></div>
+  </div>
+</div><div class="scrollhint">Scroll<i></i></div></header>
+
+<div class="marquee" aria-label="Platforms"><div class="track" id="track"></div></div>
+
+<section id="about"><div class="wrap">
+  <div class="sec-h rv"><h2>One owner for the <em class="s grad">whole funnel.</em></h2><p>Paid media, merchandising, lifecycle and measurement usually sit with different people. I connect them, so spend scales only where the numbers hold.</p></div>
+  <div class="bento">
+    <div class="b b1 glass rv">
+      <p>I’m an e-commerce manager in Dubai who owns revenue across a brand’s own store and its marketplaces. Today I run D2C and marketplace growth for a consumer-electronics brand selling smartwatches, audio, power banks and gaming accessories, and I’ve managed its Shopify store since launch.</p>
+      <p>Before this I managed 25 client stores across the EU and US end to end, from onboarding and strategy to results and retention, and led demand generation for a Dubai B2B company. I use ChatGPT, Claude-based agents and AdCreative.ai to shorten test cycles, so decisions come from data sooner.</p>
+      <div class="langs"><span class="chip">English · professional</span><span class="chip">Tamil · native</span><span class="chip">Malayalam · conversational</span></div>
+    </div>
+    <div class="b b2 glass rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></div><h3>Profitable growth</h3><p>Every channel tied to ROAS, nCAC, ACoS and AOV.</p></div>
+    <div class="b b3 glass rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg></div><h3>D2C + marketplaces</h3><p>Pricing, promotions and merchandising aligned across every channel.</p></div>
+    <div class="b b4 glass rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></div><h3>Retention</h3><p>Email, SMS and subscribe-and-save that bring buyers back.</p></div>
+    <div class="b b5 glass rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Measurement</h3><p>Server-side tracking and weekly reporting management trusts.</p></div>
+  </div>
+</div></section>
+
+<section id="platforms" style="padding-top:20px"><div class="wrap">
+  <div class="sec-h rv"><h2>Platforms I <em class="s grad">sell on.</em></h2><p>Marketplaces, store platforms and delivery apps I’ve worked hands-on, across MENA, the US, the EU and Africa.</p></div>
+  <div class="plats" id="platGrid"></div>
+</div></section>
+
+<section id="cases" style="padding-top:20px"><div class="wrap">
+  <div class="sec-h rv"><h2>Selected <em class="s grad">case studies.</em></h2><p>Six problems, what I did and what moved. Company details are anonymised; each figure is labelled as my result or a team result.</p></div>
+  <div class="cases" id="caseGrid"></div>
+</div></section>
+
+<section id="experience"><div class="wrap">
+  <div class="sec-h rv"><h2>Experience.</h2><p>Seven years across D2C, marketplaces and demand generation, across MENA, the US and Europe.</p></div>
+  <div class="tl" id="tl"><div class="fill" id="tlFill"></div>
+    <div class="job glass rv"><h3>Ecommerce Manager · RF Technologies LLC</h3>
+      <div class="meta"><span>Dubai, UAE</span><span>Nov 2025 – present</span><span>Ecommerce Lead, Jan 2025 – Nov 2025</span></div>
+      <p class="co">Consumer-electronics brand (smartwatches, audio, power banks, gaming accessories) selling through its own Shopify store, <a href="https://hezire.com/" target="_blank" rel="noopener" style="color:var(--l)">hezire.com</a>, and regional marketplaces.</p>
+      <ul><li><b>D2C:</b> run the Shopify store end to end since launch: catalogue, pricing, promotions, AOV bundles, checkout, storefront migration and on-site SEO.</li>
+      <li><b>Paid media:</b> purchase-optimised Meta funnel with existing-customer suppression and EN/AR creative testing; set up Merchant Center and Google Ads; manage Amazon PPC.</li>
+      <li><b>Lifecycle &amp; CRO:</b> welcome, abandoned-cart, post-purchase and win-back flows; subscribe-and-save; A/B tests to lift conversion rate and AOV.</li>
+      <li><b>Marketplaces:</b> Amazon (Seller and Vendor Central), Noon, Jumia, Trendyol, Carrefour and Styli across the UAE, KSA and wider MENA, plus Amazon US and Jumia in Nigeria and Egypt; contributed to Kenya expansion planning.</li>
+      <li><b>Measurement:</b> server-side tracking (Pixel, Conversions API), UTMs and GA4; weekly management reporting on sales, ROAS, cost per purchase, conversion and stock.</li></ul>
+    </div>
+    <div class="job glass rv"><h3>Senior Marketing Specialist · Safe Line Group</h3>
+      <div class="meta"><span>Dubai, UAE</span><span>Dec 2022 – Jan 2025</span></div>
+      <ul><li>Grew website traffic 52% year over year through paid campaigns, SEO and content.</li>
+      <li>Cut cost per lead 26% across Google Ads and Meta Ads through audience segmentation and bid-strategy optimisation.</li>
+      <li>Implemented CRM automation and lead-nurture workflows that contributed to a 22% rise in qualified pipeline.</li>
+      <li>Partnered with sales, operations and management on campaign priorities, lead quality and reporting.</li></ul>
+    </div>
+    <div class="job glass rv" style="margin:0"><h3>E-commerce and Marketing Executive · Utopain VA Ltd</h3>
+      <div class="meta"><span>Remote · clients in the EU and US</span><span>Dec 2018 – Nov 2022</span></div>
+      <ul><li><b>Client portfolio:</b> managed 25 client e-commerce stores across the EU and US, end to end: onboarding, strategy, execution, results reporting and retention.</li>
+      <li><b>Revenue:</b> on a 150-SKU Amazon account, grew sales 64% over three years through listing optimisation, PPC expansion, content and promotional planning.</li>
+      <li><b>Efficiency:</b> cut that account’s ACoS from 34% to 19% with structured campaign builds, negative-keyword management and regular bid reviews.</li>
+      <li><b>Operations:</b> ran listings, pricing, promotions, PPC, inventory monitoring and seasonal campaigns across client stores.</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="sec-h rv"><h2>Core <em class="s grad">competencies.</em></h2><p>Grouped the way an e-commerce P&amp;L runs: get the traffic, win the sale, keep the customer, prove the number.</p></div>
+  <div class="comps">
+    <div class="comp glass rv perf"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2-8z"/></svg></div><h3>Performance marketing</h3><ul><li>Full-funnel Meta Ads: prospecting, dynamic remarketing, existing-customer suppression</li><li>Purchase-optimised campaigns benchmarked on new-customer CAC</li><li>Google Search and Shopping with Merchant Center feeds</li><li>Amazon Sponsored Products: structure, negatives, bid and search-term reviews</li><li>Audience segmentation and bid-strategy optimisation (CPL −26%)</li><li>Bilingual English and Arabic creative testing</li><li>Budget allocated by ROAS, nCAC and ACoS</li><li>Server-side tracking with Conversions API, UTMs and GA4</li></ul></div>
+    <div class="comp glass rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>SEO &amp; marketplace research</h3><ul><li>Amazon keyword and listing research with Helium 10</li><li>Keyword research and on-site SEO with Semrush and Ahrefs</li><li>Site search and merchandising with Algolia</li></ul></div>
+    <div class="comp glass rv "><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l2-5h14l2 5M3 9h18v11H3zM9 13h6"/></svg></div><h3>D2C &amp; marketplaces</h3><ul><li>Shopify and Magento store ownership</li><li>Listings, content and pricing on Amazon, Noon, Trendyol, Jumia</li><li>Promotions and AOV bundles</li><li>Launches and stock planning</li><li>MENA, US and EU expansion</li></ul></div>
+    <div class="comp glass rv "><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14l-1.5-8h-11zM9 9V7a3 3 0 0 1 6 0v2"/></svg></div><h3>Delivery &amp; quick commerce</h3><ul><li>End-to-end operations on Deliveroo and Careem</li><li>Sell-out ownership on both platforms</li><li class="ph-li"><span class="ph">[add a sell-out or revenue result]</span></li></ul></div>
+    <div class="comp glass rv "><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4zM8 20h8M12 16v4"/></svg></div><h3>CRO &amp; retention</h3><ul><li>A/B tests on product and landing pages</li><li>Checkout optimisation</li><li>Bundle and discount-code strategy</li><li>Email and SMS automation</li><li>Win-back and subscribe-and-save</li></ul></div>
+    <div class="comp glass rv wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Analytics &amp; reporting</h3><ul><li>ROAS, nCAC, AOV, CVR, CPL and ACoS tracking</li><li>GA4, Shopify Analytics, Excel, SQL</li><li>Weekly management reporting on sales, ROAS, stock</li><li>Delivery with sales, logistics and finance</li></ul></div>
+  </div>
+</div></section>
+
+<section id="ai" style="padding-top:0"><div class="wrap">
+  <div class="sec-h rv"><h2>AI &amp; automation, <em class="s grad">built into the work.</em></h2><p>I use AI to shorten the path from idea to result: agents that review campaigns and draft reports, generated creative for faster testing, and automated lifecycle and CRM flows.</p></div>
+  <div class="flow rv">
+    <div class="step glass"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7"/></svg></div><b>Data in</b><span>GA4, Ads Manager, Amazon and Shopify exports</span></div>
+    <div class="step glass hot"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/></svg></div><b>AI agents</b><span>Claude-based agents review campaigns and draft reports</span></div>
+    <div class="step glass"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z"/></svg></div><b>Creative engine</b><span>Higgsfield, AdCreative.ai and ChatGPT variations</span></div>
+    <div class="step glass"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></div><b>Automation</b><span>Klaviyo, Mailchimp, HubSpot and Salesforce flows</span></div>
+    <div class="step glass"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg></div><b>Decision</b><span>Weekly report: scale, fix or stop</span></div>
+  </div>
+  <div class="comps" style="margin-top:16px">
+    <div class="comp glass rv"><h3>AI agents</h3><ul><li>Build custom AI agents with Claude for campaign reviews</li><li>Agent-drafted weekly performance reports</li><li>Faster ad copy and listing iterations</li></ul></div>
+    <div class="comp glass rv"><h3>AI creative</h3><ul><li>AI video and image creative with Higgsfield</li><li>Ad creative variations with AdCreative.ai</li><li>Copy drafts with ChatGPT and Claude</li><li>More variants per test, shorter test cycles</li></ul></div>
+    <div class="comp glass rv"><h3>Marketing automation</h3><ul><li>Email and SMS flows in Klaviyo and Mailchimp: welcome, abandoned cart, post-purchase, win-back</li><li>CRM and lead-nurture workflows in HubSpot and Salesforce</li><li>Subscribe-and-save and segmented campaigns</li></ul></div>
+  </div>
+</div></section>
+
+<section id="leadership" style="padding-top:0"><div class="wrap">
+  <div class="bento">
+    <div class="b b1 glass rv"><h2 style="font-size:clamp(30px,3.6vw,46px);margin-bottom:20px">Leadership &amp; <em class="s grad">collaboration.</em></h2>
+      <p>E-commerce results depend on teams outside marketing. I keep promoted SKUs in stock by aligning launches with warehouse and logistics, agree lead-quality definitions with sales, and work with design and finance on creative and margins.</p>
+      <p>Management gets one weekly view of sales, ROAS, cost per purchase, conversion and stock, and launch actions are tracked in Jira so nothing depends on memory.</p>
+      <div class="note"><b>To add:</b> people you lead or mentor · agencies you brief · a decision you influenced at management level.</div></div>
+    <div class="b b2 glass rv"><h3>Sales</h3><p>Lead quality, pipeline reporting and campaign priorities.</p></div>
+    <div class="b b3 glass rv"><h3>Warehouse &amp; logistics</h3><p>Stock aligned to launches and promotions.</p></div>
+    <div class="b b4 glass rv"><h3>Design</h3><p>English and Arabic creative for testing.</p></div>
+    <div class="b b5 glass rv"><h3>Finance &amp; management</h3><p>Weekly reporting and unit-economics calls.</p></div>
+  </div>
+</div></section>
+
+<section id="tools" style="padding-top:0"><div class="wrap">
+  <div class="sec-h rv"><h2>Platforms &amp; <em class="s grad">tools.</em></h2><p>Hands-on, used in the roles above.</p></div>
+  <div class="tools" id="toolGrid"></div>
+</div></section>
+
+<section id="credentials" style="padding-top:0"><div class="wrap">
+  <div class="sec-h rv"><h2>Credentials.</h2><p>Formal training in communication and digital marketing.</p></div>
+  <div class="creds">
+    <div class="cred glass rv"><span class="seal">CPD</span><div class="k">Certified · Sep 2026</div><h3>Complete Digital Marketing (CDM)</h3><p>The CPD Certification Service · Learners Point Academy · 36 CPD hours · Ref. A007507</p></div>
+    <div class="cred glass rv"><div class="k">Professional certification</div><h3>Diploma in Digital Marketing</h3><p><span class="ph">[add provider and year, or merge with the CDM card if it is the same course]</span></p></div>
+    <div class="cred glass rv"><div class="k">Degree · 2018</div><h3>Bachelor of Arts &amp; Communication</h3><p>Manonmaniam Sundaranar University, India</p></div>
+  </div>
+  <div class="note"><b>Worth adding:</b> Amazon Ads, Google Ads, Meta Blueprint or GA4 certifications if you hold them.</div>
+</div></section>
+
+<section id="testimonials" class="draft" style="padding-top:0"><div class="wrap">
+  <div class="sec-h"><h2>Kind words.</h2><p>Hidden when notes are off, until real quotes are added.</p></div>
+  <div class="creds">
+    <div class="cred glass"><p class="ph">[add a manager’s quote about commercial impact]</p><p>— Name, title</p></div>
+    <div class="cred glass"><p class="ph">[add a sales or operations partner’s quote]</p><p>— Name, title</p></div>
+    <div class="cred glass"><p class="ph">[add a client or agency partner’s quote]</p><p>— Name, title</p></div>
+  </div>
+  <div class="note"><b>How:</b> request LinkedIn recommendations and ask permission to quote 1–2 sentences each.</div>
+</div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap">
+  <div class="contact glass rv">
+    <div class="eyebrow"><span class="dot"></span>Open to new roles</div>
+    <h2>Let’s grow your <em class="s grad">e-commerce.</em></h2>
+    <p>E-commerce Manager, E-commerce Account Manager and Performance Marketer roles across MENA, the US and the EU. Send a note and I’ll reply within two working days.</p>
+    <div class="cta"><a class="btn" href="mailto:anushamurugan777@gmail.com">Email me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="https://www.linkedin.com/in/anusha-murugan/" target="_blank" rel="noopener">LinkedIn</a><button class="btn ghost" id="copyEmail">Copy email</button></div>
+    <div class="cline"><span>anushamurugan777@gmail.com</span><span>+971 55 648 7947</span><span>Dubai, UAE</span><a href="https://www.linkedin.com/in/anusha-murugan/" target="_blank" rel="noopener" style="color:var(--l)">linkedin.com/in/anusha-murugan</a></div>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">© 2026 Anusha Murugan · Figures are from my own work; employer and client details are anonymised where confidential.</div></footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="dlg-h"><div><div class="tag" id="dlgTag"></div><h2 id="dlgTitle" style="font-size:clamp(26px,3.4vw,38px);margin-top:8px"></h2></div><button id="dlgClose" aria-label="Close">×</button></div><div class="dlg-b" id="dlgBody"></div></dialog>
+<div class="toast" id="toast">Copied</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+{
+const PLAT=['Amazon','Noon','Shopify','Magento','Trendyol','Jumia','Deliveroo','Careem','Carrefour','Styli','Meta Ads','Google Ads'];
+document.getElementById('track').innerHTML=[...PLAT,...PLAT].map(p=>`<span>${p}</span>`).join('');
+const TOOLS=[['Commerce platforms',['Shopify','Magento','Amazon Seller Central','Amazon Vendor Central','Noon','Jumia','Trendyol','Carrefour','Styli','Deliveroo','Careem']],['Performance marketing',['Meta Ads Manager','Google Ads','Google Shopping','Merchant Center','Amazon Ads','Conversions API']],['AI & creative',['Custom AI agents','Claude','ChatGPT','AdCreative.ai','Higgsfield']],['Email, CRM & automation',['Klaviyo','Mailchimp','HubSpot','Salesforce']],['SEO & marketplace research',['Helium 10','Semrush','Ahrefs']],['Measurement & data',['GA4','Meta Pixel','Shopify Analytics','Excel','SQL']],['Site search & merchandising',['Algolia']],['Delivery & design',['Jira','Canva']],['Markets',['MENA','UAE','KSA','Egypt','US','EU','Nigeria']]];
+document.getElementById('toolGrid').innerHTML=TOOLS.map(([k,a])=>`<div class="tool glass rv"><b>${k.replace('&','&amp;')}</b><div class="chips">${a.map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>`).join('');
+const CASES=[
+{tag:"Amazon Ads · European seller, 150 SKUs",big:"34→19%",ml:"ACoS, a 44% relative cut",title:"Cutting Amazon ad cost on a 150-SKU catalogue",who:"My result",kpis:["ACoS 34% → 19%","−44% relative","150 SKUs"],
+context:"One of 25 client stores I managed: a European business selling 150 SKUs on Amazon, 2018–2022.",
+challenge:"Advertising cost of sales sat at 34%, eroding margin across a broad catalogue.",
+objective:"Bring ACoS to a level the margin could support while sales kept growing. [add target ACoS if one was set]",
+role:"Owned Amazon PPC for the account: campaign structure, keywords, bids and reporting. [confirm whether you worked alone or with a team]",
+strategy:"Rebuild campaigns so spend could be controlled by product and search intent, then remove waste through consistent keyword discipline.",
+actions:["Restructured Sponsored Products campaigns into a cleaner build","Ran negative-keyword management to cut non-converting search terms","Held regular bid and search-term reviews"],
+tools:"Amazon Seller Central, Amazon Ads, Excel",
+results:["ACoS down from 34% to 19%, a 44% relative reduction","[add TACoS or ad-attributed sales change]"],
+lessons:"[add the lesson in your own words]",
+proof:"Monthly ACoS trend line from an anonymised Amazon Ads export · before/after campaign-structure diagram · search-term report excerpt with negatives highlighted"},
+{tag:"Marketplace growth · Amazon Europe",big:"+64%",ml:"Amazon sales over three years",title:"Growing a multi-SKU Amazon account year over year",who:"My result",kpis:["+64% sales","3 years","150 SKUs"],
+context:"Same 150-SKU Amazon client, one of 25 stores in my portfolio, with full operational ownership.",
+challenge:"Grow a multi-SKU account year over year without letting ad cost or stock problems eat the gains.",
+objective:"Sustained sales growth across the catalogue. [add annual target if there was one]",
+role:"Managed full Amazon operations: listings, pricing, promotions, PPC, inventory monitoring and seasonal campaigns.",
+strategy:"Make listings convert better first, then widen paid reach, then plan promotions around the seasonal calendar.",
+actions:["Optimised listings and content [confirm: titles, bullets, images, A+ content]","Expanded PPC coverage to more products and keywords","Planned promotional and seasonal campaigns","Monitored inventory so promoted products stayed available"],
+tools:"Amazon Seller Central, Amazon Ads, Excel",
+results:["Sales up 64% over three years","[add unit or conversion-rate change]","[add Buy Box or best-seller ranking wins, if any]"],
+lessons:"[add lesson learned]",
+proof:"Indexed sales chart (Year 0 = 100) to keep revenue confidential · listing before/after screenshots · seasonal promotion calendar"},
+{tag:"D2C · UAE consumer electronics",big:"1 funnel",ml:"Acquisition to retention, tracked weekly",title:"Building a Shopify growth engine beside marketplaces",who:"My result",kpis:["Shopify since launch","EN/AR creative","Server-side tracking"],
+context:"Dubai consumer-electronics brand (smartwatches, audio, power banks, gaming accessories) selling on its own Shopify store and regional marketplaces. I have run the store since launch.",
+challenge:"Build and scale a D2C store next to established marketplace channels, with measurement management could trust.",
+objective:"Profitable D2C growth judged on new-customer CAC, ROAS and AOV. [add revenue or ROAS target]",
+role:"Ecommerce Lead, then Ecommerce Manager: end-to-end owner of the store, paid media, lifecycle and reporting.",
+strategy:"One funnel, measured end to end: purchase-optimised acquisition, a store built to convert and raise AOV, then lifecycle flows to bring buyers back.",
+actions:["Ran catalogue, pricing, promotions, AOV bundles, checkout, storefront migration and on-site SEO","Built a purchase-optimised Meta funnel from prospecting to dynamic remarketing, with existing-customer suppression and EN/AR creative tests","Set up Merchant Center and Google Ads","Launched welcome, abandoned-cart, post-purchase and win-back email and SMS flows, plus subscribe-and-save","A/B tested product pages, landing pages and offers","Implemented server-side tracking (Pixel, Conversions API), UTMs and GA4"],
+tools:"Shopify, Meta Ads Manager, Conversions API, Google Ads, Merchant Center, GA4, ChatGPT, AdCreative.ai",link:"https://hezire.com/",
+results:["One tracked acquisition-to-retention funnel, reported weekly to management","[add conversion-rate change]","[add AOV change from bundles]","[add ROAS or new-customer CAC trend]","[add share of revenue from email/SMS flows or repeat-purchase rate]"],
+lessons:"[add lesson learned]",
+proof:"Funnel diagram from ad to repeat purchase · GA4 conversion-rate chart · one A/B test result card · email-flow map · anonymised weekly report template"},
+{tag:"Marketplaces · MENA and US",big:"6+",ml:"Marketplaces across MENA, the US and Africa",title:"Running one brand across many marketplaces",who:"My result",kpis:["6 marketplaces","7 countries","Kenya planning"],
+context:"Same consumer-electronics brand on Amazon (Seller and Vendor Central), Noon, Jumia, Trendyol, Carrefour and Styli across the UAE, KSA and wider MENA, plus Amazon US and Jumia in Nigeria and Egypt.",
+challenge:"Keep pricing, promotions and stock consistent across many channels, so promoted products never sell out mid-campaign.",
+objective:"Grow marketplace revenue across regions without channel conflict or stock-outs. [add target]",
+role:"Run launches and marketplace operations; contributed to Kenya expansion planning. [confirm which marketplaces you launched versus inherited]",
+strategy:"Treat the website and every marketplace as one funnel: aligned pricing, promotions and merchandising, with inventory planned around launches.",
+actions:["Ran product launches across marketplaces","Aligned inventory with warehouse and logistics so promoted SKUs stayed in stock","Aligned pricing, promotions and merchandising with the D2C store","Tracked launch actions in Jira","Used ChatGPT, AdCreative.ai and Claude-based agents for copy and creative variations"],
+tools:"Amazon Seller and Vendor Central, Noon, Jumia, Trendyol, Carrefour, Styli, Jira",
+results:["[add marketplace revenue growth]","[add number of markets or listings launched by you]","[add in-stock rate or stock-out reduction]"],
+lessons:"[add lesson learned]",
+proof:"Market map of channels and countries · launch timeline · channel revenue-mix chart (percentages only)"},
+{tag:"Account management · EU and US",big:"25 stores",ml:"Client e-commerce stores managed end to end",title:"Running a 25-client e-commerce portfolio from onboarding to retention",who:"My result",kpis:["25 client stores","EU and US","Onboarding to retention"],
+context:"Remote e-commerce services provider, 2018–2022. I managed a portfolio of 25 client stores in the EU and US.",
+challenge:"Deliver results for many clients at once, each with its own catalogue, marketplace mix and goals, and keep them renewing.",
+objective:"Grow each client’s sales profitably and retain the account. [add client retention target]",
+role:"Account owner for each store: onboarding, strategy, execution, results reporting and retention.",
+strategy:"Standardise onboarding and reporting so time goes into the levers that move sales: listings, advertising, pricing and promotions.",
+actions:["Onboarded new clients and set store-level goals","Built each client’s strategy across listings, PPC, pricing and promotions","Ran day-to-day store operations and seasonal campaigns","Reported results to clients and planned the next quarter to retain the account"],
+tools:"Amazon Seller Central, Amazon Ads, Helium 10, Excel",
+results:["25 client stores managed across the EU and US","Flagship account: sales +64% in three years and ACoS 34% → 19%","[add client retention or renewal rate]"],
+lessons:"[add lesson learned]",
+proof:"Anonymised client roster by region and platform · sample monthly client report · retention chart"},
+{tag:"Demand generation · Dubai B2B",big:"−26%",ml:"Cost per lead; qualified pipeline +22%",title:"Lowering lead cost while raising pipeline quality",who:"CPL mine · pipeline team",kpis:["CPL −26%","Pipeline +22%","Traffic +52%"],
+context:"Dubai-based B2B company. [add industry, anonymised]",
+challenge:"Leads from Google and Meta cost too much, and volume wasn’t turning into sales-ready pipeline.",
+objective:"Cheaper leads and a higher share of qualified pipeline. [add target]",
+role:"Senior Marketing Specialist: owned paid campaigns, SEO and content, and CRM automation; worked with sales on lead quality.",
+strategy:"Spend on the audiences that convert, then nurture leads until sales is ready for them.",
+actions:["Segmented audiences and optimised bid strategies on Google Ads and Meta Ads","Improved SEO and content marketing","Implemented CRM automation and lead-nurture workflows","Agreed lead-quality definitions and reporting with sales"],
+tools:"Google Ads, Meta Ads, CRM [confirm: Salesforce?], GA4",
+results:["Cost per lead down 26%","Qualified pipeline up 22% (team result; I built the automation and nurture)","Website traffic up 52% year over year"],
+lessons:"[add lesson learned]",
+proof:"CPL trend chart by channel · nurture-workflow diagram · traffic chart (indexed)"}];
+const PLATS=[['Amazon','Marketplace','Seller and Vendor Central, Sponsored Products ads across MENA, the US and Europe.','amazon'],['Noon','Marketplace','Listings, pricing and promotions for the UAE and KSA.','noon'],['Shopify','D2C store','Own brand store, run end to end since launch.','shopify'],['Magento','E-commerce platform','End-to-end operations, from product listings to sales.','magento'],['Trendyol','Marketplace','MENA marketplace operations and launches.','trendyol'],['Jumia','Marketplace','Marketplace operations in Nigeria and Egypt.','jumia'],['Deliveroo','Delivery and quick commerce','End-to-end operations and sell-out.','deliveroo'],['Careem','Delivery and quick commerce','End-to-end operations and sell-out.','careem']];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ph=s=>esc(s).replace(/\[([^\]]+)\]/g,'<span class="ph">[$1]</span>');
+const isPh=s=>/^\[[^\]]+\]$/.test(s.trim());
+document.getElementById('platGrid').innerHTML=PLATS.map(([n,c,d,l])=>`<div class="plat glass rv"><div class="slab${l?' logo':''}">${l?`<img src="logos/${l}.png" alt="${n}" loading="lazy">`:`<span>${n}</span>`}</div><b class="pn">${n}</b><span class="cat">${c}</span><p>${ph(d)}</p></div>`).join('');
+const grid=document.getElementById('caseGrid');
+grid.innerHTML=CASES.map((c,i)=>`<article class="case glass rv" tabindex="0" role="button" data-i="${i}" aria-label="Open case study: ${esc(c.title)}"><div class="tag">${esc(c.tag)}</div><div class="big">${esc(c.big)}</div><div class="ml">${esc(c.ml)}</div><span class="who">${esc(c.who)}</span><h3>${esc(c.title)}</h3><div class="go">Read case study<i>→</i></div></article>`).join('');
+const dlg=document.getElementById('dlg');
+const list=a=>`<ul>${a.map(x=>`<li class="${isPh(x)?'ph-li':''}">${ph(x)}</li>`).join('')}</ul>`;
+const row=(k,v,cls='')=>`<div class="row ${cls}"><b>${k}</b><div>${v}</div></div>`;
+function openCase(i){const c=CASES[i];
+document.getElementById('dlgTag').textContent=c.tag+' · '+c.who;
+document.getElementById('dlgTitle').textContent=c.title;
+document.getElementById('dlgBody').innerHTML=`<div class="kpis">${c.kpis.map(k=>`<span>${esc(k)}</span>`).join('')}</div>`+
+row('Context',`<p>${ph(c.context)}</p>`)+row('Challenge',`<p>${ph(c.challenge)}</p>`)+row('Objective',`<p>${ph(c.objective)}</p>`)+row('My role',`<p>${ph(c.role)}</p>`)+row('Strategy',`<p>${ph(c.strategy)}</p>`)+row('Actions',list(c.actions))+row('Tools',`<p>${ph(c.tools)}</p>`)+(c.link?row('Live store',`<p><a href="${esc(c.link)}" target="_blank" rel="noopener" style="color:var(--l)">hezire.com ↗</a></p>`):'')+row('Results',list(c.results))+row('Lessons',`<p>${ph(c.lessons)}</p>`,isPh(c.lessons)?'draft':'')+
+`<div class="note"><b>Visual proof to add:</b> ${esc(c.proof)}. Anonymise brand names and show indexed or percentage figures where revenue is confidential.</div>`;
+if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');dlg.scrollTop=0}
+grid.addEventListener('click',e=>{const c=e.target.closest('.case');if(c)openCase(+c.dataset.i)});
+grid.addEventListener('keydown',e=>{const c=e.target.closest('.case');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCase(+c.dataset.i)}});
+document.getElementById('dlgClose').addEventListener('click',()=>dlg.close());
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+/* tilt + glare */
+if(!reduce&&fine)document.querySelectorAll('.case,.plat').forEach(el=>{
+el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;el.style.setProperty('--mx',x*100+'%');el.style.setProperty('--my',y*100+'%');el.style.transform=`rotateY(${(x-.5)*14}deg) rotateX(${(.5-y)*14}deg) translateZ(10px)`});
+el.addEventListener('pointerleave',()=>{el.style.transform=''})});
+/* magnetic buttons */
+if(!reduce&&fine)document.querySelectorAll('.btn').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.25}px)`});b.addEventListener('pointerleave',()=>{b.style.transform=''})});
+const pt=document.getElementById('portrait');
+if(!reduce&&fine)addEventListener('pointermove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;pt.style.transform=`rotateY(${x*10}deg) rotateX(${-y*10}deg)`});
+/* cursor glow */
+const cur=document.getElementById('cur');
+if(fine&&!reduce){addEventListener('pointermove',e=>{cur.style.opacity=1;cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`})}
+/* reveal */
+const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';rio.observe(el)});
+/* counters */
+const fmt=(el,v)=>{el.textContent=(el.dataset.pre||'')+Math.round(v)+(el.dataset.suf||'')};
+document.querySelectorAll('[data-n]').forEach(el=>{if(reduce)return;const to=+el.dataset.n,from=el.dataset.from?+el.dataset.from:0;const t0=performance.now()+400,d=1600;
+const step=now=>{const k=Math.min(1,Math.max(0,(now-t0)/d)),e=1-Math.pow(1-k,3);fmt(el,from+(to-from)*e);if(k<1)requestAnimationFrame(step)};fmt(el,from);requestAnimationFrame(step)});
+/* notes toggle */
+const nb=document.getElementById('notesBtn');
+function setNotes(on){document.body.classList.toggle('clean',!on);nb.textContent='Notes '+(on?'on':'off');nb.setAttribute('aria-pressed',on);try{localStorage.setItem('am-notes2',on?'1':'0')}catch(e){}}
+let saved=null;try{saved=localStorage.getItem('am-notes2')}catch(e){}
+setNotes(saved==='1');nb.addEventListener('click',()=>setNotes(document.body.classList.contains('clean')));
+const toast=document.getElementById('toast');
+document.getElementById('copyEmail').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('anushamurugan777@gmail.com');toast.textContent='Email copied'}catch(e){toast.textContent='anushamurugan777@gmail.com'}toast.classList.add('on');setTimeout(()=>toast.classList.remove('on'),1800)});
+/* in-page links: scroll by script (the viewer frame blocks hash navigation) */
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1),t=id?document.getElementById(id):null;if(!t)return;e.preventDefault();
+const y=t.getBoundingClientRect().top+scrollY-(id==='top'?0:84);window.scrollTo({top:id==='top'?0:y,behavior:reduce?'auto':'smooth'});try{history.replaceState(null,'','#'+id)}catch(err){}});
+/* nav highlight + timeline fill */
+const navLinks=[...document.querySelectorAll('#links a')],secs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
+const tl=document.getElementById('tl'),fill=document.getElementById('tlFill');
+let S=0;
+function onScroll(){const y=scrollY,h=innerHeight;S=y/Math.max(1,document.documentElement.scrollHeight-h);
+let cur=-1;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<h*.4)cur=i});navLinks.forEach((a,i)=>a.classList.toggle('on',i===cur));
+const r=tl.getBoundingClientRect();fill.style.height=Math.max(0,Math.min(r.height-6,h*.6-r.top))+'px';}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+/* ---------- 3D scene: glossy liquid form over a perspective grid ---------- */
+const cv=document.getElementById('gl');
+try{if(!window.THREE)throw 0;const T=THREE;
+const renderer=new T.WebGLRenderer({canvas:cv,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x07060b,1);
+renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+const scene=new T.Scene();scene.fog=new T.Fog(0x07060b,14,38);
+const cam=new T.PerspectiveCamera(40,1,.1,100);cam.position.set(0,0,12);
+/* studio environment for reflections */
+const ec=document.createElement('canvas');ec.width=1024;ec.height=512;const ex=ec.getContext('2d');
+ex.fillStyle='#06040c';ex.fillRect(0,0,1024,512);
+[[220,150,170,'rgba(168,85,247,1)'],[620,120,140,'rgba(255,255,255,.95)'],[860,300,200,'rgba(240,171,252,.9)'],[420,380,180,'rgba(109,40,217,1)'],[60,300,120,'rgba(196,181,253,.8)']].forEach(([x,y,r,c])=>{const g=ex.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,c);g.addColorStop(1,'rgba(0,0,0,0)');ex.fillStyle=g;ex.fillRect(0,0,1024,512)});
+const etex=new T.CanvasTexture(ec);etex.mapping=T.EquirectangularReflectionMapping;etex.encoding=T.sRGBEncoding;
+const pm=new T.PMREMGenerator(renderer);const env=pm.fromEquirectangular(etex).texture;
+/* liquid form */
+const geo=new T.SphereGeometry(1,innerWidth<700?96:160,innerWidth<700?72:120),base=geo.attributes.position.array.slice();
+const mat=new T.MeshPhysicalMaterial({color:0x7c3aed,metalness:.55,roughness:.16,clearcoat:1,clearcoatRoughness:.08,envMap:env,envMapIntensity:1.6,sheen:new T.Color(0xf0abfc)});
+const blob=new T.Mesh(geo,mat);scene.add(blob);
+scene.add(new T.AmbientLight(0x2a1650,.6));
+const l1=new T.PointLight(0xa855f7,6,30);l1.position.set(-5,3,5);scene.add(l1);
+const l2=new T.PointLight(0xf0abfc,4,30);l2.position.set(5,-2,4);scene.add(l2);
+const l3=new T.DirectionalLight(0xffffff,1.2);l3.position.set(2,6,8);scene.add(l3);
+/* halo */
+const hc=document.createElement('canvas');hc.width=hc.height=256;const hx=hc.getContext('2d'),hg=hx.createRadialGradient(128,128,0,128,128,128);hg.addColorStop(0,'rgba(168,85,247,.55)');hg.addColorStop(1,'rgba(168,85,247,0)');hx.fillStyle=hg;hx.fillRect(0,0,256,256);
+const halo=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(hc),transparent:true,depthWrite:false,blending:T.AdditiveBlending}));scene.add(halo);
+/* perspective grid floor */
+const grid=new T.GridHelper(80,80,0x8b5cf6,0x3b2370);grid.position.y=-3.4;grid.material.transparent=true;grid.material.opacity=.35;scene.add(grid);
+let W=1,H=1,mob=false;
+function size(){W=innerWidth;H=innerHeight;mob=W<1000;renderer.setSize(W,H,false);cam.aspect=W/H;cam.fov=mob?55:40;cam.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+let tx=0,ty=0,px=0,py=0;addEventListener('pointermove',e=>{tx=e.clientX/W-.5;ty=e.clientY/H-.5});
+const pos=geo.attributes.position,clock=new T.Clock();let sS=0,t=0;
+const noise=(x,y,z,t)=>Math.sin(x*1.7+t)*.5+Math.sin(y*2.1+t*1.3)*.35+Math.sin(z*1.9-t*.9)*.4+Math.sin((x+y+z)*2.6+t*.7)*.22;
+function frame(){const dt=Math.min(clock.getDelta(),.05);t+=reduce?0:dt;px+=(tx-px)*.05;py+=(ty-py)*.05;sS+=(S-sS)*.08;
+const a=base;for(let i=0;i<a.length;i+=3){const x=a[i],y=a[i+1],z=a[i+2],d=1+.16*noise(x,y,z,t*.8);pos.array[i]=x*d;pos.array[i+1]=y*d;pos.array[i+2]=z*d}
+pos.needsUpdate=true;geo.computeVertexNormals();
+const k=Math.min(1,sS*4);
+const hx0=mob?1.9:3.4,hy0=mob?3.4:.35,r0=mob?1.05:2.15;
+blob.position.set(hx0*(1-k)+(mob?0:4.6)*k,hy0*(1-k)+(mob?3:.6)*k,-.5-k*2);
+blob.scale.setScalar(r0*(1-k*.25));
+blob.rotation.set(t*.12+py*.5+sS*2,t*.18+px*.8+sS*3,0);
+halo.position.copy(blob.position).add(new T.Vector3(0,0,-1.2));halo.scale.setScalar(blob.scale.x*5.2);
+grid.position.z=(t*.6)%1;grid.rotation.y=px*.15;
+cam.position.x=px*.6;cam.position.y=-py*.5+sS*1.5;cam.lookAt(0,sS*1.2,0);
+renderer.render(scene,cam)}
+let raf=0,live=true;
+document.addEventListener('visibilitychange',()=>{live=!document.hidden;if(live)loop()});
+function loop(){cancelAnimationFrame(raf);if(!live)return;frame();if(!reduce)raf=requestAnimationFrame(loop)}
+loop();if(reduce)addEventListener('scroll',()=>requestAnimationFrame(frame),{passive:true});
+}catch(err){cv.style.background='radial-gradient(40% 45% at 72% 38%,rgba(168,85,247,.45),transparent 70%),radial-gradient(40% 40% at 15% 85%,rgba(139,92,246,.2),transparent 70%),#07060b'}
+}
+</script>
+</body>
+</html>
